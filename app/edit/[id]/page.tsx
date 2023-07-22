@@ -1,40 +1,29 @@
-"use client";
-import Link from "next/link";
-import { useState } from "react";
+import EditForms from "@/components/EditForms";
 
-export default function page() {
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+const getContactById = async (id: string) => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/contacts/${id}`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch contact");
+    }
+
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export default async function EditPage({ params }: { params: { id: string } }) {
+  const id = params.id;
+  const { contact } = await getContactById(id);
+  const { name, phoneNumber } = contact;
+
   return (
     <main className="p-3 max-w-sm mx-auto">
-      <input
-        type="text"
-        placeholder="Name"
-        id="input-name"
-        className="p-2 w-full focus:outline-none border border-slate-700 mb-3"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        type="number"
-        placeholder="08123456789"
-        id="input-name"
-        className="p-2 w-full focus:outline-none border border-slate-700"
-        value={number}
-        onChange={(e) => setNumber(e.target.value)}
-      />
-      <button
-        type="submit"
-        className="bg-blue-500 p-3 mt-4 rounded-lg text-white mr-3"
-      >
-        Save Changes
-      </button>
-      <Link
-        href="/"
-        className="py-3 px-5 rounded-lg text-slate-700 bg-slate-200"
-      >
-        Cancel
-      </Link>
+      <EditForms _id={id} name={name} phoneNumber={phoneNumber} />
     </main>
   );
 }
