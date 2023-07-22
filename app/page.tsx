@@ -23,11 +23,11 @@ interface Contact {
 }
 
 export default async function Home() {
-  const { contacts } = await getContacts();
+  const { contacts }: { contacts: Contact[] } = await getContacts();
 
   return (
     <main className="p-3 max-w-sm mx-auto">
-      {contacts.map((contact: Contact) => (
+      {contacts.map((contact) => (
         <ContactItem
           _id={contact._id}
           name={contact.name}
