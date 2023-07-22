@@ -1,7 +1,14 @@
 import { AddButton } from "@/components/AddButton";
 import { ContactItem } from "@/components/ContactItem";
 
-const getContacts = async () => {
+interface Contact {
+  _id: string;
+  name: string;
+  phoneNumber: string;
+}
+
+export default async function Home() {
+  const getContacts = async () => {
   try {
     const res = await fetch("http://localhost:3000/api/contacts", {
       cache: "no-store",
@@ -15,14 +22,7 @@ const getContacts = async () => {
     console.log("Error loading contacts : ", error);
   }
 };
-
-interface Contact {
-  _id: string;
-  name: string;
-  phoneNumber: string;
-}
-
-export default async function Home() {
+  
   const { contacts }: { contacts: Contact[] } = await getContacts();
 
   return (
