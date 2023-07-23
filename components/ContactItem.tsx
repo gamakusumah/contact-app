@@ -16,7 +16,7 @@ export const ContactItem = (props: ContactProps) => {
     const confirmed = confirm("Are you sure?");
     if (confirmed) {
       const res = await fetch(
-        `http://localhost:3000/api/contacts?id=${props._id}`,
+        `https://contact-app-liart.vercel.app/api/contacts?id=${props._id}`,
         {
           method: "DELETE",
         }

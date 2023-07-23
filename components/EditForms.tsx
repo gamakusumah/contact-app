@@ -20,7 +20,7 @@ export default function EditForms(props: Contact) {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/api/contacts/${props._id}`,
+        `https://contact-app-liart.vercel.app/api/contacts/${props._id}`,
         {
           method: "PUT",
           headers: {
