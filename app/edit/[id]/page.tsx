@@ -2,9 +2,12 @@ import EditForms from "@/components/EditForms";
 
 const getContactById = async (id: string) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/contacts/${id}`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `https://contact-app-liart.vercel.app/api/contacts/${id}`,
+      {
+        cache: "no-store",
+      }
+    );
 
     if (!res.ok) {
       throw new Error("Failed to fetch contact");

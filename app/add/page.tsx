@@ -13,13 +13,16 @@ export default function AddPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:3000/api/contacts", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ name, phoneNumber }),
-      });
+      const res = await fetch(
+        "https://contact-app-liart.vercel.app/api/contacts",
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({ name, phoneNumber }),
+        }
+      );
 
       if (res.ok) {
         router.refresh();
